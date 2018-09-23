@@ -13,5 +13,12 @@ requestInfoDefaultTitles:
 # *OPTIONAL* Label to be added to Issues and Pull Requests with insufficient information given
 requestInfoLabelToAdd: needs-more-info
 
-todo:
-  keyword: "@makeAnIssue"
+# Config for todo - https://github.com/jasonetco/todo
+
+# These are the available config settings.
+keyword: ["@todo", "TODO"] # string|string[]
+bodyKeyword: ["@body", "BODY"] # string|string[]
+blobLines: 5                # number|boolean, 0 or false to disable
+autoAssign: true            # string|string[]|boolean
+label: true                 # boolean|string|string[]
+reopenClosed: true          # boolean
