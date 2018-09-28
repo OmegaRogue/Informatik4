@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD:Informatik/src/Informatik.java
-
-
 public class Informatik {
 
 	public static void main(String[] args) {
@@ -47,8 +43,6 @@ public class Informatik {
 	}
 
 }
-=======
-
 
 public class informatik {
 
@@ -64,10 +58,6 @@ public class informatik {
 	
 
 }
->>>>>>> 1ed92f842152e3ae34c084dbc33049b377697a0f:Informatik/src/informatik.java
-=======
-
-
 public class informatik {
 
 	public static void main(String[] args) {
@@ -82,4 +72,3 @@ public class informatik {
 	
 
 }
->>>>>>> 1ed92f842152e3ae34c084dbc33049b377697a0f
