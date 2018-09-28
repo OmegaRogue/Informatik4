@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:Informatik/src/Informatik.java
 
 
@@ -64,3 +65,21 @@ public class informatik {
 
 }
 >>>>>>> 1ed92f842152e3ae34c084dbc33049b377697a0f:Informatik/src/informatik.java
+=======
+
+
+public class informatik {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] a = {32,17,24,7,8,12,4};
+		System.out.print(a[0]);
+		for (int i = 1; i < a.length; i++) {
+			System.out.print("; "+a[i]);
+		}
+		
+	}
+	
+
+}
+>>>>>>> 1ed92f842152e3ae34c084dbc33049b377697a0f
