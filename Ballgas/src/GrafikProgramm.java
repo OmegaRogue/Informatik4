@@ -3,6 +3,11 @@ import javax.swing.JFrame;
 
 public class GrafikProgramm
 {
+	/**
+	 * TODO Change to Java8
+	 * @todo Change to Java8
+	 * @body Update BallGas to Java8
+	 */
 	JFrame grafiktestFenster = new JFrame();
 	GrafikPanel grafikpanel = new GrafikPanel();
 	
