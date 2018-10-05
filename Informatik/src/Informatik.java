@@ -1,5 +1,13 @@
+/**
+ * Irgendwelche Sachen
+ * @author OmegaRogue
+ *
+ */
 public class Informatik {
-
+/**
+ * die Main Methode
+ * 
+ */
 	public static void main(String[] args) {
 		
 		int[] a = {32,17,24,7,8,12,4};

@@ -1,20 +1,30 @@
-
+/**
+ * Elemente der eigenen Listenimplementation
+ * @author OmegaRogue
+ *
+ */
 public class ListenElement {
 	private String inhalt;
 	private int index;
 	private ListenElement nachfolger;
 	private ListenElement vorgänger;
-	private boolean start;
-	public ListenElement(boolean first,String wert) {
+	/**
+	 * Konstruktor für Listen Elemente
+	 * @param wert Der Inhalt des Elements
+	 */
+	public ListenElement(String wert) {
 		inhalt = wert;
-		start = first;
 		index = 0;
 	}
+	/**
+	 * Fügt einen neues Element am Ende der Liste hinzu
+	 * @param neuerNachfolger Das neue Element
+	 */
 	public void setNachfolger(ListenElement neuerNachfolger) {
 		if(nachfolger == null) {
 			nachfolger = neuerNachfolger;
 			nachfolger.setVorgänger(this);
-			nachfolger.setIndex(getVorgänger().index++);
+			nachfolger.setIndex(nachfolger.getVorgänger().getIndex()+1);
 		}
 		else {
 			getNachfolger().setNachfolger(neuerNachfolger);
@@ -24,27 +34,46 @@ public class ListenElement {
 		
 		
 	}
+	/**
+	 * Gibt den Nachfolger dieses Elements zurück
+	 * @return Der Nachfolger
+	 */
 	public ListenElement getNachfolger() {
 		return nachfolger;
 	}
+	/**
+	 * Setzt den Pointer zum Element vor diesem Element in der Liste
+	 * @param alterVorgänger Das vorherige Element
+	 */
 	public void setVorgänger(ListenElement alterVorgänger) {
 		vorgänger = alterVorgänger;
 	}
+	/**
+	 * Gibt den Vorgänger dieses Elements zurück
+	 * @return Der Vorgänger
+	 */
 	public ListenElement getVorgänger() {
 		return vorgänger;
 	}
+	/**
+	 * Setzt den Index dieses Elements
+	 * @param i Der Index
+	 */
 	public void setIndex(int i) {
 		this.index = i;
 	}
+	/**
+	 * Gibt den Index dieses Elements zurück
+	 * @return Der Index
+	 */
 	public int getIndex() {
 		return this.index;
 	}
+	/**
+	 * Gibt Inhalt und Index dieses Elements als String zurück
+	 */
 	public String toString() {
-		//System.out.println(nachfolger);
-		if(start) {
-			return "["+0+"]"+": " + inhalt;
-		}
-		return "["+index+"]"+": " + inhalt;
+		return "["+this.getIndex()+"]"+": " + inhalt;
 		
 	}
 }
