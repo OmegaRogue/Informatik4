@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharImg {
-	public static Map<String, String> charMap;
+	public static Map<String, String> charMap = new HashMap<String,String>();
 	public static String test;
-	public static void main(String[] args) {
-		charMap = new HashMap<String,String>();
+	public CharImg() {
 		charMap.put("00","\n");
 		charMap.put("01"," ");
 		charMap.put("02","─");
@@ -19,7 +18,10 @@ public class CharImg {
 		charMap.put("08","├");
 		charMap.put("09","┤");
 		charMap.put("0A","┬");
-		charMap.put("0B","┼");
+		charMap.put("0B","┼"); 
+	}
+	public static void main(String[] args) {
+		
 		test =  "0405010101040500"+
 				"0607010101060700"+
 				"0101010101010100"+

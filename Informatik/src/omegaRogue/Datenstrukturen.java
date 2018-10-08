@@ -17,8 +17,10 @@ public class Datenstrukturen {
 		
 		// Klassisch:
 		for(int i = 0;i<personen.size();i++) {
-			System.out.println(i+": " + personen.get(i));
+			//System.out.println(i+": " + personen.get(i));
 		}
+		Baum2 baum = new Baum2("test");
+		System.out.println(baum);
 	}
 
 }
