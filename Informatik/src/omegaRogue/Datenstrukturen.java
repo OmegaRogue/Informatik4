@@ -1,3 +1,4 @@
+package omegaRogue;
 import java.util.ArrayList;
 public class Datenstrukturen {
 

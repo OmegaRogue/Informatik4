@@ -1,3 +1,4 @@
+package omegaRogue;
 
 public class Person {
 String name;

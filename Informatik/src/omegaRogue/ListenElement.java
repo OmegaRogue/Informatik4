@@ -1,3 +1,4 @@
+package omegaRogue;
 /**
  * Elemente der eigenen Listenimplementation
  * @author OmegaRogue
