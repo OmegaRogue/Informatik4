@@ -39,6 +39,7 @@ public class Baum
 	 * Diese Funktion fügt ein neues Baumelement hinzu. 
 	 * @param neuerWert Der Inhalt für das hinzuzufügende Baumelement.
 	 *
+	 *
 	public void add(String neuerWert)
 	{
 		// Zeilenkommentar
