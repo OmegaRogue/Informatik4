@@ -17,5 +17,8 @@ public class BaumElement
 		BaumElement neuerNachfolger = new BaumElement(wert);
 		nachfolger.add(neuerNachfolger);
 	}
+	public String toString() {
+		return inhalt;
+	}
 	
 }

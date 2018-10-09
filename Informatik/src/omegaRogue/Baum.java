@@ -23,7 +23,7 @@ public class Baum
 	}
 	public String toString() {
 		String ausgabe = "";
-		ausgabe += root.inhalt;
+		ausgabe += root;
 		ausgabe += CharImg.generate("000301000602");
 		return ausgabe;
 	}
