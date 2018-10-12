@@ -7,10 +7,12 @@ public class BaumElement
 	private String inhalt;
 	public ArrayList <BaumElement> nachfolger;
 	private int pos;
-
+	private Baum tree;
+	private BaumElement top;
 	
-	public BaumElement(int pos, String wert)
+	public BaumElement(Baum tree, BaumElement top, int pos, String wert)
 	{
+		this.tree = tree;
 		this.pos = pos;
 		inhalt = wert;
 
@@ -19,7 +21,7 @@ public class BaumElement
 	
 	public void addNachfolger(String wert)
 	{
-		BaumElement neuerNachfolger = new BaumElement(pos+1,wert);
+		BaumElement neuerNachfolger = new BaumElement(tree, this,pos+1,wert);
 		nachfolger.add(neuerNachfolger);
 	}
 	public String toString() {
@@ -27,12 +29,28 @@ public class BaumElement
 		if(this.pos == 0) {
 			return string;
 		}
-		string = "└" + string;
-		for (int i = 2; i <= pos; i++) {
-			string = " " + string;
+		if(this.pos == 1) {
+			if((tree.root.nachfolger.size() - tree.root.nachfolger.indexOf(this) -1) == 0) {
+				string = "└" + string;
+			}
+			else {
+				string = "├" + string;
+			}
+			return string;
+		} else {
+			if((top.nachfolger.size() - top.nachfolger.indexOf(this) -1) == 0) {
+				string = "└" + string;
+			}
+			else {
+				string = "├" + string;
+			}	
+			for (int i = 2; i <= pos; i++) {
+				string = " " + string;
+			}
+			
+			return string;
 		}
 		
-		return string;
 	}
 	public void rekursiveAusgabe() {
 		System.out.println(this);
@@ -60,6 +78,9 @@ public class BaumElement
 			}
 		return get;
 		
+	}
+	public Baum getTree() {
+		return tree;
 	}
 	
 	

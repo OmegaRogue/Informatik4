@@ -19,7 +19,7 @@ public class Baum
 	 */
 	public Baum(String startWert)
 	{
-		root = new BaumElement(0,startWert);
+		root = new BaumElement(this,null, 0, startWert);
 	}
 	public String toString() {
 		String ausgabe = "";
