@@ -8,7 +8,7 @@ package omegaRogue;
  * @since 05.10.2018
  *
  */
-public class Baum 
+public class Baum
 {
 	public CharImg output = new CharImg();
 	BaumElement root;
@@ -19,13 +19,16 @@ public class Baum
 	 */
 	public Baum(String startWert)
 	{
-		root = new BaumElement(startWert);
+		root = new BaumElement(0,startWert);
 	}
 	public String toString() {
 		String ausgabe = "";
 		ausgabe += root;
 		ausgabe += CharImg.generate("000301000602");
 		return ausgabe;
+	}
+	public void addNodeAt(String atNode, String nodeData) {
+		root.rekursiveSuche(atNode).addNachfolger(nodeData);
 	}
 }	
 

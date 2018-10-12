@@ -1,3 +1,4 @@
+package general;
 public class Timer extends Thread
 {
 	GrafikPanel gpanel = null;

@@ -4,31 +4,47 @@ import java.util.ArrayList;
 
 public class BaumElement 
 {
-	public String inhalt;
+	private String inhalt;
 	public ArrayList <BaumElement> nachfolger;
+	private int pos;
+
 	
-	public BaumElement(String wert)
+	public BaumElement(int pos, String wert)
 	{
+		this.pos = pos;
 		inhalt = wert;
-		nachfolger = new ArrayList<BaumElement>();
+
+		this.nachfolger = new ArrayList<BaumElement>();
 	}
 	
 	public void addNachfolger(String wert)
 	{
-		BaumElement neuerNachfolger = new BaumElement(wert);
+		BaumElement neuerNachfolger = new BaumElement(pos+1,wert);
 		nachfolger.add(neuerNachfolger);
 	}
 	public String toString() {
-		return inhalt;
+		String string = inhalt;
+		if(this.pos == 0) {
+			return string;
+		}
+		string = "└" + string;
+		for (int i = 2; i <= pos; i++) {
+			string = " " + string;
+		}
+		
+		return string;
 	}
 	public void rekursiveAusgabe() {
-		System.out.println(inhalt);
+		System.out.println(this);
 		for (BaumElement be : nachfolger) {
 			be.rekursiveAusgabe();
 		}
 	}
 	public BaumElement getThis () {
 		return this;
+	}
+	public int getPos() {
+		return pos;
 	}
 	public BaumElement rekursiveSuche(String suchWert) {
 		BaumElement get = null;
