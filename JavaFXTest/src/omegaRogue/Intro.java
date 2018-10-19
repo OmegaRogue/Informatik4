@@ -37,7 +37,7 @@ public class Intro extends Application {
 		Line line = new Line(40.0,50.0,140.0,150.0);
 		line.setStrokeWidth(4);
 		
-		Group gesicht = produziereEinGesicht(10,10,50);
+		Group gesicht = produziereEinGesicht(70,80);
 		Group root = new Group();
 		root.getChildren().addAll(kreis, rechteck, line, gesicht);
 		Scene scene = new Scene(root,800,600);
@@ -47,16 +47,16 @@ public class Intro extends Application {
 		
 		
 	}
-	public Group produziereEinGesicht(double x, double y, double r) {
+	public Group produziereEinGesicht(double x, double y) {
 		Group gruppe = new Group();
-		Circle kopf = new Circle(x,y,r,Color.YELLOW );
+		Circle kopf = new Circle(x,y,80,Color.YELLOW );
 		kopf.setStroke(Color.ORANGE);
 		kopf.setStrokeWidth(3);
-		Circle auge1 = new Circle(40, 40, 15, Color.WHITE);
+		Circle auge1 = new Circle(x-30, y-40, 15, Color.WHITE);
 		auge1.setStroke(Color.BLACK);
-		Circle auge2 = new Circle(40, 40, 15, Color.WHITE);
+		Circle auge2 = new Circle(x+35, y-40, 15, Color.WHITE);
 		auge2.setStroke(Color.BLACK);
-		Arc mund = new Arc(70, 110, 60, 30, 180, 180);
+		Arc mund = new Arc(x, y+30, 60, 30, 180, 180);
 		mund.setFill(Color.RED);
 		gruppe.getChildren().addAll(kopf,auge1,auge2,mund);
 		return gruppe;
