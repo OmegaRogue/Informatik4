@@ -7,7 +7,7 @@ public class BoundingBox{
 	public final double minY;
 	
 	public final double maxX;
-	
+
 	public final double maxY;
 	
 	public BoundingBox (double x1, double y1, double x2, double y2) {

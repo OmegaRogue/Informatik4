@@ -1,20 +1,28 @@
 package omegaRogue;
 
+import javafx.event.Event;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import java.util.*;
 
 /**
  * @version 1
  * @author OmegaRogue
  */
-public class Ball extends Circle
+public class Ball extends Circle implements Behaviour
 {
-	double radius = 4;
-	double x = 0;
-	double y = 0;
-	double vx = 0.4;
-	double vy = 0.2;
+	double radius = 1;
+
+
+	//Vector3 position;
+	//Vector3 velocity;
+	Point2D position;
+	Point2D velocity;
 	Color c= Color.BLUE;
+	Stage stage;
+
 
 
 	/**
@@ -24,15 +32,30 @@ public class Ball extends Circle
 	 * @param radius Radius des Balls.
 	 * @param col Farbe des Balls.
 	 */
-	public Ball(double bx, double by, double radius, Color col)
+	public Ball(Stage stage, double bx, double by, double vx, double vy, double radius, Color col)
 	{
 		super(bx,by,radius);
-		x=bx;
-		y=by;
+		//position = new Vector3(bx,by);
+		//velocity = new Vector3(vx,vy);
+		position = new Point2D(bx,by);
+		velocity = new Point2D(vx,vy);
+		this.radius = radius;
 		c = col;
 		setFill(col);
+		this.stage = stage;
 	}
-
+	public Ball(Stage stage, double bx, double by, double radius, Color col)
+	{
+		super(bx,by,radius);
+		//position = new Vector3(bx,by);
+		//velocity = Vector3.Zero();
+		position = new Point2D(bx,by);
+		velocity = Point2D.ZERO;
+		this.radius = radius;
+		c = col;
+		setFill(col);
+		this.stage = stage;
+	}
 	/**
 	 * Setzt die Farbe des Balls.
 	 * @param farbe
@@ -48,9 +71,29 @@ public class Ball extends Circle
 	 */
 	public void updatePosition()
 	{
-		x=x+vx;
-		y=y+vy;
-		relocate(x, y);
+		position.add(velocity);
+		relocate(position.getX(),position.getY());
+
+
+
 	}
+	public void Start() {
+
+	}
+	public void Update() {
+		updatePosition();
+	}
+	public void reflectX(){
+		velocity.add(-(2*velocity.getX()),0);
+	}
+	public void reflectY() {
+		velocity.add(0,-(2*velocity.getY()));
+	}
+	public void reflect(){
+		reflectX();
+		reflectY();
+	}
+
+
 
 }

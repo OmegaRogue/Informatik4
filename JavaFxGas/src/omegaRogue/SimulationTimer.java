@@ -15,7 +15,7 @@ public class SimulationTimer extends AnimationTimer
 	}
 
 	@Override
-	public void handle(long now) 
+	public void handle(long now)
 	{
 		if ((now-lastUpdate)> (msec * 1000000))
 		{
