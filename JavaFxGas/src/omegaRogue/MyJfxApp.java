@@ -42,6 +42,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import java.lang.reflect.*;
 
 /**
  * Übungsapplikation zur objektorientierten Programmierung mit JavaFX.
@@ -66,6 +67,7 @@ public class MyJfxApp extends Application
 	Random rand = new Random();
 	Ball[] Baelle = new Ball[500];
 	SimulationTimer simulationLoop;
+	Iterator objItr;
    // Line[] Bounds = new Line[4];
 
 	public void start(Stage stage)
@@ -73,11 +75,18 @@ public class MyJfxApp extends Application
 		for (int i = 0; i < Baelle.length; i++) {
 			Baelle[i] = new Ball(stage,
 					ThreadLocalRandom.current().nextDouble(
-							15, scene.getWidth()),
-					ThreadLocalRandom.current().nextDouble(15, scene.getHeight()),rand.nextDouble()*10-5,rand.nextDouble()*10-5,
+							15,
+							scene.getWidth()),
+					ThreadLocalRandom.current().nextDouble(
+							15,
+							scene.getHeight()),
 					5,
 					Color.RED);
-			Baelle[i].Start();
+
+			Baelle[i].velocity = new Point2D(
+					ThreadLocalRandom.current().nextDouble(-10,10),
+					ThreadLocalRandom.current().nextDouble(-10,10)
+			);
 		}
 		root.getChildren().addAll(Baelle);
      //   root.getChildren().addAll(Bounds);
@@ -85,6 +94,9 @@ public class MyJfxApp extends Application
 		stage.setScene(scene);
 
 		stage.show();
+        objItr = root.getChildren().listIterator();
+
+            
 
 		startSimulation(scene);
 
@@ -94,6 +106,13 @@ public class MyJfxApp extends Application
 	{
 		simulationLoop = new SimulationTimer(this,5);
 		simulationLoop.start();
+		while(objItr.hasNext()) {
+			Object element = objItr.next();
+			if (element instanceof Behaviour) {
+				((Behaviour) element).Start();
+			}
+		}
+
 	}
 
 	/**
@@ -101,10 +120,16 @@ public class MyJfxApp extends Application
 	 */
 	public void updateSimulation()
 	{
+//		objItr = root.getChildren().listIterator();
+//		while(objItr.hasNext()) {
+//			Object element = objItr.next();
+//			if (element instanceof Behaviour) {
+//				((Behaviour) element).Update();
+//			}
+//		}
 		for (int i = 0; i < Baelle.length; i++) {
 			checkBounds(Baelle[i]);
-			Baelle[i].Update();
-
+			Baelle[i].updatePosition();
 		}
 	}
 
@@ -129,7 +154,7 @@ public class MyJfxApp extends Application
 		}
         for (Ball static_ball : Baelle)
             if (static_ball != ball) {
-                if (ball.getBoundsInParent().intersects(static_ball.getBoundsInParent())) {
+                if (ball.collideWith(static_ball)) {
                     ball.setColor(Color.BLUE);      //collision
 					Point2D temp = ball.velocity;
                     ball.velocity = static_ball.velocity;

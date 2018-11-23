@@ -18,11 +18,20 @@ public class Ball extends Circle implements Behaviour
 
 	//Vector3 position;
 	//Vector3 velocity;
-	Point2D position;
-	Point2D velocity;
+	public Point2D position;
+	public Point2D velocity;
 	Color c= Color.BLUE;
 	Stage stage;
 
+	public long getVelMod() {
+		return velMod;
+	}
+
+	public void setVelMod(long velMod) {
+		this.velMod = velMod;
+	}
+
+	private long velMod;
 
 
 	/**
@@ -55,6 +64,7 @@ public class Ball extends Circle implements Behaviour
 		c = col;
 		setFill(col);
 		this.stage = stage;
+
 	}
 	/**
 	 * Setzt die Farbe des Balls.
@@ -71,29 +81,34 @@ public class Ball extends Circle implements Behaviour
 	 */
 	public void updatePosition()
 	{
-		position.add(velocity);
+		position = position.add(velocity.multiply(velMod));
 		relocate(position.getX(),position.getY());
 
 
 
 	}
 	public void Start() {
-
+		velMod = 3;
 	}
 	public void Update() {
 		updatePosition();
 	}
 	public void reflectX(){
-		velocity.add(-(2*velocity.getX()),0);
+		velocity = new Point2D(-velocity.getX(),velocity.getY());
 	}
 	public void reflectY() {
-		velocity.add(0,-(2*velocity.getY()));
+		velocity = new Point2D(velocity.getX(),-velocity.getY());
 	}
 	public void reflect(){
 		reflectX();
 		reflectY();
 	}
-
+	public boolean collideWith(Ball b) {
+		if(this.getBoundsInParent().intersects(b.getBoundsInParent()))
+			return true;
+		else
+			return false;
+	}
 
 
 }
