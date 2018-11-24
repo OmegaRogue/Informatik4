@@ -43,6 +43,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import java.lang.reflect.*;
+import javafx.scene.control.*;
 
 /**
  * Übungsapplikation zur objektorientierten Programmierung mit JavaFX.
