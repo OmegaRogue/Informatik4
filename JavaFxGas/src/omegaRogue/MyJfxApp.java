@@ -68,7 +68,10 @@ public class MyJfxApp extends Application
 	Ball[] Baelle = new Ball[500];
 	SimulationTimer simulationLoop;
 	Iterator objItr;
+	Slider tempControl;
+	Block[] Bloecke = new Block[1];
    // Line[] Bounds = new Line[4];
+
 
 	public void start(Stage stage)
 	{
@@ -81,14 +84,22 @@ public class MyJfxApp extends Application
 							15,
 							scene.getHeight()),
 					5,
-					Color.RED);
+					Color.GREEN);
 
 			Baelle[i].velocity = new Point2D(
 					ThreadLocalRandom.current().nextDouble(-10,10),
 					ThreadLocalRandom.current().nextDouble(-10,10)
 			);
 		}
+		for(int i = 0; i <Bloecke.length; i++) {
+		    Bloecke[i] = new Block(30,30,20,10,Color.RED);
+        }
+		tempControl = new Slider(1,100,1);
+		tempControl.setBlockIncrement(1);
+        tempControl.setMajorTickUnit(1);
+        root.getChildren().add(tempControl);
 		root.getChildren().addAll(Baelle);
+		root.getChildren().addAll(Bloecke);
      //   root.getChildren().addAll(Bounds);
 		stage.setTitle("My JavaFX Application");
 		stage.setScene(scene);
@@ -125,11 +136,18 @@ public class MyJfxApp extends Application
 //			Object element = objItr.next();
 //			if (element instanceof Behaviour) {
 //				((Behaviour) element).Update();
+//				if(element.getClass() == Ball.class) {
+//                    checkBounds((Ball) element);
+//                    ((Ball)element).setVelMod((long)tempControl.getValue());
+//                }
+//
 //			}
 //		}
 		for (int i = 0; i < Baelle.length; i++) {
 			checkBounds(Baelle[i]);
-			Baelle[i].updatePosition();
+			Baelle[i].Update();
+            Baelle[i].setVelMod((long)tempControl.getValue());
+
 		}
 	}
 
@@ -155,15 +173,10 @@ public class MyJfxApp extends Application
         for (Ball static_ball : Baelle)
             if (static_ball != ball) {
                 if (ball.collideWith(static_ball)) {
-                    ball.setColor(Color.BLUE);      //collision
 					Point2D temp = ball.velocity;
                     ball.velocity = static_ball.velocity;
                     static_ball.velocity = temp;
-                } else {
-                    ball.setColor(Color.GREEN);    //no collision
                 }
-            } else {
-                ball.setColor(Color.GREEN);    //no collision -same block
             }
 
 

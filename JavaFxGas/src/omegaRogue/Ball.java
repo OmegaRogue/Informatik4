@@ -11,7 +11,7 @@ import java.util.*;
  * @version 1
  * @author OmegaRogue
  */
-public class Ball extends Circle implements Behaviour
+public class Ball extends Circle implements Behaviour, Rigidbody
 {
 	double radius = 1;
 
@@ -29,7 +29,7 @@ public class Ball extends Circle implements Behaviour
 
 	public void setVelMod(long velMod) {
 		this.velMod = velMod;
-	}
+	}  
 
 	private long velMod;
 
@@ -103,12 +103,23 @@ public class Ball extends Circle implements Behaviour
 		reflectX();
 		reflectY();
 	}
-	public boolean collideWith(Ball b) {
-		if(this.getBoundsInParent().intersects(b.getBoundsInParent()))
-			return true;
-		else
-			return false;
+	public boolean collideWith(Rigidbody r) {
+	    if(r.getClass() == Ball.class) {
+            Ball b = (Ball) r;
+
+            return this.getBoundsInParent().intersects(b.getBoundsInParent());
+
+
+        }
+	    if(r.getClass() == Block.class) {}
+
+        return false;
 	}
+
+    @Override
+    public EnumDirection collideAt(Rigidbody r) {
+        return EnumDirection.NONE;
+    }
 
 
 }
