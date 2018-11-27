@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a272b722-e5e9-4a22-8b49-90535551538b" name="Default Changelist" comment="" />
+    <list default="true" id="a272b722-e5e9-4a22-8b49-90535551538b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/omegaRogue/Direction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omegaRogue/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omegaRogue/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omegaRogue/BoundingBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omegaRogue/BoundingBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omegaRogue/MyJfxApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/omegaRogue/MyJfxApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omegaRogue/Rahmen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/omegaRogue/TemperatureControl.java" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/omegaRogue/MyJfxApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="47" column="3" lean-forward="true" selection-start-line="47" selection-start-column="3" selection-end-line="47" selection-end-column="3" />
+            <state relative-caret-position="68">
+              <caret line="86" column="12" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -24,10 +32,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/omegaRogue/TemperatureControl.java">
+        <entry file="file://$PROJECT_DIR$/src/omegaRogue/BoundingBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+            <state relative-caret-position="765">
+              <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/omegaRogue/Direction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/omegaRogue/Ball.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -38,6 +64,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -52,6 +79,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/omegaRogue/Rahmen.java" />
+        <option value="$PROJECT_DIR$/src/omegaRogue/TemperatureControl.java" />
+        <option value="$PROJECT_DIR$/src/omegaRogue/Ball.java" />
+        <option value="$PROJECT_DIR$/src/omegaRogue/Direction.java" />
+        <option value="$PROJECT_DIR$/src/omegaRogue/BoundingBox.java" />
         <option value="$PROJECT_DIR$/src/omegaRogue/MyJfxApp.java" />
       </list>
     </option>
@@ -71,7 +103,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -94,7 +125,34 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="JavaFxGas" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="JavaFxGas" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="JavaFxGas" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="JavaFxGas" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name=".settings" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="JavaFxGas" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="JavaFxGas" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="JavaFxGas" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="JavaFxGas" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="omegaRogue" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -104,9 +162,9 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="javafxgas" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543066035778" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543343441343" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../JavaFXTest" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -136,6 +194,10 @@
       <workItem from="1543065511307" duration="34000" />
       <workItem from="1543065598357" duration="25000" />
       <workItem from="1543065787153" duration="85000" />
+      <workItem from="1543065900565" duration="3913000" />
+      <workItem from="1543078306869" duration="2252000" />
+      <workItem from="1543144737925" duration="4756000" />
+      <workItem from="1543342652370" duration="1217000" />
     </task>
     <task id="LOCAL-00001" summary="JavaFXGas">
       <created>1543065265658</created>
@@ -144,17 +206,23 @@
       <option name="project" value="LOCAL" />
       <updated>1543065265659</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="JavaFXGas">
+      <created>1543066077732</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1543066077733</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1046000" />
+    <option name="totallyTimeSpent" value="13184000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26332623" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23626667" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -163,7 +231,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -175,6 +243,7 @@
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Heroku" order="13" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Messages" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -184,6 +253,7 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Maven-2 Build" order="9" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,20 +264,36 @@
     <option name="LAST_COMMIT_MESSAGE" value="JavaFXGas" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/omegaRogue/Rahmen.java" />
+    <entry file="file://$PROJECT_DIR$/src/omegaRogue/TemperatureControl.java" />
     <entry file="file://$PROJECT_DIR$/src/omegaRogue/MyJfxApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="47" column="3" lean-forward="true" selection-start-line="47" selection-start-column="3" selection-end-line="47" selection-end-column="3" />
+        <state relative-caret-position="68">
+          <caret line="86" column="12" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/omegaRogue/TemperatureControl.java">
+    <entry file="file://$PROJECT_DIR$/src/omegaRogue/BoundingBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        <state relative-caret-position="765">
+          <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omegaRogue/Direction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/omegaRogue/Ball.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="24" />
         </state>
       </provider>
     </entry>

@@ -69,10 +69,14 @@ public class MyJfxApp extends Application
 	Ball[] Baelle = new Ball[500];
 	SimulationTimer simulationLoop;
 	Iterator objItr;
+	Slider tempControl;
+	BoundingBox box;
    // Line[] Bounds = new Line[4];
 
 	public void start(Stage stage)
 	{
+		box = new BoundingBox(new Rectangle(10,10,20,20));
+		box.setColor(Color.FIREBRICK);
 		for (int i = 0; i < Baelle.length; i++) {
 			Baelle[i] = new Ball(stage,
 					ThreadLocalRandom.current().nextDouble(
@@ -89,6 +93,21 @@ public class MyJfxApp extends Application
 					ThreadLocalRandom.current().nextDouble(-10,10)
 			);
 		}
+
+		tempControl = new Slider();
+		tempControl.setMin(0);
+		tempControl.setMax(100);
+		tempControl.setValue(1);
+		tempControl.setShowTickLabels(true);
+		tempControl.setShowTickMarks(true);
+		tempControl.setMajorTickUnit(50);
+		tempControl.setMinorTickCount(5);
+		tempControl.setBlockIncrement(0.01);
+		tempControl.setShowTickLabels(true);
+		tempControl.setShowTickMarks(true);
+
+		root.getChildren().add(box);
+		root.getChildren().add(tempControl);
 		root.getChildren().addAll(Baelle);
      //   root.getChildren().addAll(Bounds);
 		stage.setTitle("My JavaFX Application");
@@ -130,7 +149,9 @@ public class MyJfxApp extends Application
 //		}
 		for (int i = 0; i < Baelle.length; i++) {
 			checkBounds(Baelle[i]);
+			Baelle[i].setVelMod((long)tempControl.getValue());
 			Baelle[i].updatePosition();
+
 		}
 	}
 
@@ -153,7 +174,11 @@ public class MyJfxApp extends Application
 		{
 			ball.reflectY();
 		}
-        for (Ball static_ball : Baelle)
+		if(box.intersectsAt(ball)==Direction.DOWN || box.intersectsAt(ball)==Direction.UP)
+			ball.reflectY();
+		if(box.intersectsAt(ball)==Direction.RIGHT || box.intersectsAt(ball)==Direction.LEFT)
+			ball.reflectX();
+		for (Ball static_ball : Baelle)
             if (static_ball != ball) {
                 if (ball.collideWith(static_ball)) {
                     ball.setColor(Color.BLUE);      //collision

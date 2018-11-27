@@ -22,6 +22,7 @@ public class Ball extends Circle implements Behaviour
 	public Point2D velocity;
 	Color c= Color.BLUE;
 	Stage stage;
+	private long velMod;
 
 	public long getVelMod() {
 		return velMod;
@@ -31,7 +32,7 @@ public class Ball extends Circle implements Behaviour
 		this.velMod = velMod;
 	}
 
-	private long velMod;
+
 
 
 	/**
