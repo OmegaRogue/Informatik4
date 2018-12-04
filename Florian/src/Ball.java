@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
  * @author Lorenz
  */
 public class Ball extends Circle implements HarterKoerper {
+    static int ballAnzahl = 0;
+    int ballnummer = 0;
 	double radius = 4;
 	double x = 0;
 	double y = 0;
@@ -31,6 +33,9 @@ public class Ball extends Circle implements HarterKoerper {
 		y = by;
 		c = col;
 		setFill(col);
+		ballnummer = ballAnzahl;
+		ballAnzahl++;
+
 	}
 
 	/**
@@ -57,7 +62,7 @@ public class Ball extends Circle implements HarterKoerper {
 	/**
 	 * Diese Methode wird vom Simulationstimer immer wieder aufgerufen.
 	 *
-	 * @param myJfxApp
+	 *
 	 */
 	public boolean collideWith(HarterKoerper h) {
 		if (h.getClass() == Ball.class) {

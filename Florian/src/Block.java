@@ -43,7 +43,7 @@ public class Block extends Rectangle implements HarterKoerper
 
             Ball b = (Ball) h;
 
-            if (((b.x > this.x) && (b.x < (this.x + this.width))) && ((this.y - b.y) <= b.radius))
+            if (((b.x >= this.x) && (b.x <= (this.x + this.width))) && ((this.y - b.y) <= b.radius))
             {
                 System.out.println("1");
                 b.vy = -b.vy;
