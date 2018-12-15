@@ -1,0 +1,19 @@
+.topBox {
+    -fx-border-color: red;
+    -fx-border-width: 3pt;
+}
+
+.leftBox {
+    -fx-border-color: #0021ff;
+    -fx-border-width: 3pt;
+}
+
+.centerBox {
+    -fx-border-color: #74ff0a;
+    -fx-border-width: 3pt;
+}
+
+.rightBox {
+    -fx-border-color: #ff00d4;
+    -fx-border-width: 3pt;
+}
