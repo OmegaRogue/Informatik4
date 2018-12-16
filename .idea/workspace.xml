@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37dfe05b-e9b9-487b-a85f-5e0e600fe1aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/JavaFXTest/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaFXTest/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaFXTest/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaFXTest/JavaFXTest.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaFXTest/src/omegaRogue/jfxGUI/Einstieg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Selector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/MyJfxApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/MyJfxApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Rigidbody.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaFxGas/src/omegaRogue/Rigidbody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,6 +67,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Dev" />
+      </map>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="85" />
@@ -86,6 +81,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -133,6 +129,21 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Informatik4" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Ballgas" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="Informatik4" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Informatik" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -149,27 +160,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Informatik4" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Ballgas" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="Informatik4" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Informatik" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/JavaFXTest" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/JavaFxGas" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -210,12 +206,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1202000" />
+    <option name="totallyTimeSpent" value="1223000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4993007" visible="true" weight="0.28322148" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4993007" visible="true" weight="0.27452025" />
       <window_info id="Structure" order="1" sideWeight="0.5006993" side_tool="true" weight="0.24966443" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />

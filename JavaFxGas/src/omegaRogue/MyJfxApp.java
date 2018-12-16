@@ -6,6 +6,9 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
@@ -19,8 +22,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utils.ClassLoaderUtil;
 
 import java.math.RoundingMode;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.Random;
@@ -43,46 +48,36 @@ import java.util.concurrent.ThreadLocalRandom;
  * @version 2
  */
 public class MyJfxApp extends Application {
+
+
 	public HBox toolBar;
 	public VBox navBar;
 	public GridPane viewWindow;
-	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-	DecimalFormat df;
+	public URL mainWindow = ClassLoaderUtil.getResource("GUI/MainWindow.fxml", this.getClass());
+	public URL style = ClassLoaderUtil.getResource("Stylesheets/Styles.css", this.getClass());
 	Random rand = new Random();
+	private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+	private DecimalFormat df;
+	private Ball[] Baelle = new Ball[500];
+	private Iterator objItr;
+	private Slider tempControl;
+	private Block[] Bloecke = new Block[1];
+	private Text ballCount;
+	private Text tempDisplay;
+	private Text ballCountDisplay;
+	private LineChart<Number, Number> velChart = createVelChart();
+	private ColorPicker colorPicker;
+	private Selector selector = Selector.getInstance();
+	private Group root = new Group();
+	private Scene scene = new Scene(createBallGasPane(), primaryScreenBounds.getWidth() - 100, primaryScreenBounds.getHeight() - 100);
+	private Scene topScene;
+	private Scene leftScene;
+	private Scene rightScene;
+	private Stage top;
+	private Stage left;
+	private Stage right;
+	private Ball ball;
 
-	Ball[] Baelle = new Ball[500];
-
-	SimulationTimer simulationLoop;
-
-	Iterator objItr;
-
-	Slider tempControl;
-
-	Block[] Bloecke = new Block[1];
-
-
-	Text ballCount;
-	Text tempDisplay;
-
-	Text ballCountDisplay;
-
-
-	ColorPicker colorPicker;
-	ColorPicker velDisplay;
-
-	Selector selector = Selector.getInstance();
-
-	Group root = new Group();
-
-	Scene scene = new Scene(createBallGasPane(), primaryScreenBounds.getWidth() - 100, primaryScreenBounds.getHeight() - 100);
-	Scene topScene;
-	Scene leftScene;
-	Scene rightScene;
-
-
-	Stage top;
-	Stage left;
-	Stage right;
 
 	/*
 	 * @param args the command line arguments
@@ -92,6 +87,7 @@ public class MyJfxApp extends Application {
 	}
 
 	public void start(Stage stage) {
+
 
 		left = new Stage();
 		top = new Stage();
@@ -150,8 +146,8 @@ public class MyJfxApp extends Application {
 		tempControl.setMajorTickUnit(5);
 
 		tempDisplay = new Text();
-
 		changeTempDisplay();
+
 
 
 		root.getChildren().addAll(Baelle);
@@ -164,43 +160,37 @@ public class MyJfxApp extends Application {
 		navBar = (VBox) createNavigationPane();
 		viewWindow = (GridPane) createDisplayPane();
 
-		topScene = new Scene(toolBar, primaryScreenBounds.getWidth(), (primaryScreenBounds.getHeight() / 21.6));
-		topScene.getStylesheets().add(String.valueOf(MyJfxApp.class.getResource("Styles.css")));
 
-		leftScene = new Scene(navBar, (primaryScreenBounds.getWidth() / 25.6), primaryScreenBounds.getHeight() - topScene.getHeight());
-		leftScene.getStylesheets().add(String.valueOf(MyJfxApp.class.getResource("Styles.css")));
+		topScene = new Scene(toolBar);
+		topScene.getStylesheets().add(String.valueOf(style));
 
-		rightScene = new Scene(viewWindow, 200, primaryScreenBounds.getHeight() - topScene.getHeight());
-		rightScene.getStylesheets().add(String.valueOf(MyJfxApp.class.getResource("Styles.css")));
 
-		scene.getStylesheets().add(String.valueOf(MyJfxApp.class.getResource("Styles.css")));
+		leftScene = new Scene(navBar);
+		leftScene.getStylesheets().add(String.valueOf(style));
+
+		rightScene = new Scene(viewWindow);
+		rightScene.getStylesheets().add(String.valueOf(style));
+
+		scene.getStylesheets().add(String.valueOf(style));
 
 		stage.setTitle("My JavaFX Application");
 		stage.setScene(scene);
-		stage.setX(primaryScreenBounds.getMinX() + leftScene.getWidth());
-		stage.setY(primaryScreenBounds.getMinY() + topScene.getHeight());
-		stage.initStyle(StageStyle.UNDECORATED);
+
 		stage.setHeight(primaryScreenBounds.getHeight() - topScene.getHeight());
 		stage.setWidth(primaryScreenBounds.getWidth() - leftScene.getWidth() - rightScene.getWidth());
 
 
-		//left.setTitle("Nav");
+		left.setTitle("Nav");
 		left.setScene(leftScene);
-		left.setX(primaryScreenBounds.getMinX());
-		left.setY(primaryScreenBounds.getMinY() + topScene.getHeight());
-		left.initStyle(StageStyle.UNDECORATED);
+
 
 
 		top.setTitle("Display");
 		top.setScene(topScene);
-		top.setX(primaryScreenBounds.getMinX());
-		top.setY(primaryScreenBounds.getMinY());
-		top.initStyle(StageStyle.UNDECORATED);
+
 
 		right.setScene(rightScene);
-		right.setX(primaryScreenBounds.getMinX() + leftScene.getWidth() + stage.getWidth());
-		right.setY(primaryScreenBounds.getMinY() + topScene.getHeight());
-		right.initStyle(StageStyle.UNDECORATED);
+		right.initStyle(StageStyle.TRANSPARENT);
 
 
 		top.show();
@@ -211,7 +201,7 @@ public class MyJfxApp extends Application {
 		objItr = root.getChildren().listIterator();
 
 
-		startSimulation(scene);
+		startSimulation();
 
 
 	}
@@ -220,8 +210,8 @@ public class MyJfxApp extends Application {
 		tempDisplay.setText("Temperatur:" + df.format(tempControl.getValue()) + "K");
 	}
 
-	private void startSimulation(Scene scene) {
-		simulationLoop = new SimulationTimer(this, 5);
+	private void startSimulation() {
+		SimulationTimer simulationLoop = new SimulationTimer(this, 5);
 		simulationLoop.start();
 		while (objItr.hasNext()) {
 			Object element = objItr.next();
@@ -238,7 +228,7 @@ public class MyJfxApp extends Application {
 	/**
 	 * Diese Methode wird vom Simulationstimer immer wieder aufgerufen.
 	 */
-	public void updateSimulation() {
+	void updateSimulation() {
 		objItr = root.getChildren().listIterator();
 		while (objItr.hasNext()) {
 			Object element = objItr.next();
@@ -257,11 +247,13 @@ public class MyJfxApp extends Application {
 		Ball selected = (Ball) selector.getAttached();
 		selected.setColor(colorPicker.getValue());
 		ballCountDisplay.setText("Selected Ball Nr. " + selected.nr.getText());
+		updateVelChart(selected.velocity);
 
 
 	}
 
 	private void checkBounds(Ball ball) {
+		this.ball = ball;
 
 		if (ball.position.getX() < Ball.scene.getX() || ball.position.getX() + ball.getRadius() > Ball.scene.getWidth()) {
 			ball.reflect(EnumDirection.LEFT);
@@ -297,12 +289,11 @@ public class MyJfxApp extends Application {
 	private Pane createDisplayPane() {
 		final GridPane gridPane = new GridPane();
 		colorPicker = new ColorPicker(Color.GREEN);
-		velDisplay = new ColorPicker(Color.RED);
 		ballCountDisplay = new Text("");
 		Selector.getInstance().colorPicker = colorPicker;
 		gridPane.add(ballCountDisplay, 0, 0);
 		gridPane.add(colorPicker, 0, 1);
-		gridPane.add(velDisplay, 0, 2);
+		gridPane.add(velChart, 0, 2);
 		gridPane.getStyleClass().add("rightBox");
 
 
@@ -325,6 +316,33 @@ public class MyJfxApp extends Application {
 
 
 		return pane;
+	}
+
+
+	private LineChart<Number, Number> createVelChart() {
+		final NumberAxis xAxis = new NumberAxis("X", -10, 10, 1);
+		final NumberAxis yAxis = new NumberAxis("Y", -10, 10, 1);
+		XYChart.Data zero = new XYChart.Data(0, 0);
+		XYChart.Data velocity = new XYChart.Data(1, 1);
+		final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		XYChart.Series series = new XYChart.Series();
+		series.getData().add(zero);
+		series.getData().add(velocity);
+		lineChart.getData().add(series);
+		lineChart.autosize();
+		lineChart.setAnimated(true);
+		return lineChart;
+
+	}
+
+	private void updateVelChart(Point2D velocity) {
+
+		XYChart.Series series = new XYChart.Series();
+		series.getData().add(new XYChart.Data(0, 0));
+		series.getData().add(new XYChart.Data(velocity.getX(), velocity.getY()));
+		velChart.getData().clear();
+		velChart.getData().add(series);
+
 	}
 
 }
