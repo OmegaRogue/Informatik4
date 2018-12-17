@@ -1,7 +1,7 @@
 package omegaRogue;
 
 import javafx.geometry.Point2D;
-import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
  */
 public class Ball extends Circle implements Behaviour, Rigidbody {
 	static int ballCount = 0;
-	static Scene scene;
 	//Vector3 position;
 	//Vector3 velocity;
 	public Point2D position;
@@ -21,7 +20,8 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 	int ballNr = 0;
 	double radius = 1;
 	Color c = Color.BLUE;
-	private double velMod;
+	public static Pane parent;
+	private static double velMod;
 
 	/**
 	 * Konstruktor der Ballklasse.
@@ -31,7 +31,7 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 	 * @param radius Radius des Balls.
 	 * @param col    Farbe des Balls.
 	 */
-	public Ball(Scene scene, double bx, double by, double vx, double vy, double radius, Color col) {
+	public Ball(double bx, double by, double vx, double vy, double radius, Color col) {
 		super(bx, by, radius);
 		//position = new Vector3(bx,by);
 		//velocity = new Vector3(vx,vy);
@@ -40,14 +40,13 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 		this.radius = radius;
 		c = col;
 		setFill(col);
-		Ball.scene = scene;
 		ballNr = ballCount;
 		ballCount++;
 		nr = new Text("" + ballNr);
 
 	}
 
-	public Ball(Scene scene, double bx, double by, double radius, Color col) {
+	public Ball(double bx, double by, double radius, Color col) {
 		super(bx, by, radius);
 		//position = new Vector3(bx,by);
 		//velocity = Vector3.Zero();
@@ -56,19 +55,18 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 		this.radius = radius;
 		c = col;
 		setFill(col);
-		Ball.scene = scene;
 		ballNr = ballCount;
 		ballCount++;
 		nr = new Text(Integer.toString(ballNr));
 
 	}
 
-	public double getVelMod() {
+	public static double getVelMod() {
 		return velMod;
 	}
 
-	public void setVelMod(double velMod) {
-		this.velMod = velMod;
+	public static void setVelMod(double newVelMod) {
+		velMod = newVelMod;
 	}
 
 	/**
@@ -101,10 +99,12 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 	}
 
 	public void reflectX() {
+		collision(this, null);
 		velocity = new Point2D(-velocity.getX(), velocity.getY());
 	}
 
 	public void reflectY() {
+		collision(this, null);
 		velocity = new Point2D(velocity.getX(), -velocity.getY());
 	}
 
@@ -116,6 +116,7 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 	}
 
 	public void reflect(Ball b) {
+		collision(this, b);
 		Point2D temp = velocity;
 		velocity = b.velocity;
 		b.velocity = temp;
@@ -124,8 +125,8 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 	public boolean collideWith(Rigidbody r) {
 		if (r.getClass() == Ball.class) {
 			Ball b = (Ball) r;
-
 			return this.getBoundsInParent().intersects(b.getBoundsInParent());
+
 
 
 		}
@@ -149,4 +150,13 @@ public class Ball extends Circle implements Behaviour, Rigidbody {
 		return new Point2D(radius, radius);
 	}
 
+
+	private void collision(Rigidbody source, Rigidbody target) {
+		//System.out.println(source + " collided with: " + target);
+	}
+
+	@Override
+	public String toString() {
+		return "Ball Nr." + ballNr;
+	}
 }

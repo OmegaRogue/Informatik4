@@ -10,4 +10,7 @@ public interface Rigidbody {
 	Point2D getPosition();
 
 	Point2D getSize();
+
+
+	String toString();
 }

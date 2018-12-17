@@ -2,16 +2,14 @@ package omegaRogue;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,11 +17,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import utils.ClassLoaderUtil;
 
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -53,23 +52,23 @@ public class MyJfxApp extends Application {
 	public HBox toolBar;
 	public VBox navBar;
 	public GridPane viewWindow;
-	public URL mainWindow = ClassLoaderUtil.getResource("GUI/MainWindow.fxml", this.getClass());
+	static Text ballCount;
 	public URL style = ClassLoaderUtil.getResource("Stylesheets/Styles.css", this.getClass());
 	Random rand = new Random();
 	private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-	private DecimalFormat df;
+	static Text tempDisplay;
 	private Ball[] Baelle = new Ball[500];
 	private Iterator objItr;
-	private Slider tempControl;
-	private Block[] Bloecke = new Block[1];
-	private Text ballCount;
-	private Text tempDisplay;
-	private Text ballCountDisplay;
-	private LineChart<Number, Number> velChart = createVelChart();
-	private ColorPicker colorPicker;
+	static Text ballCountDisplay = new Text("");
+	static ColorPicker colorPicker;
+	static Group root = new Group();
+	static Ball selected;
+	private static DecimalFormat df;
 	private Selector selector = Selector.getInstance();
-	private Group root = new Group();
-	private Scene scene = new Scene(createBallGasPane(), primaryScreenBounds.getWidth() - 100, primaryScreenBounds.getHeight() - 100);
+	public URL mainWindow = ClassLoaderUtil.getResource("omegaRogue/MainWindow.fxml", this.getClass());
+	//private static Slider tempControl;
+	private Block[] Bloecke = new Block[1];
+	private Parent mainWin;
 	private Scene topScene;
 	private Scene leftScene;
 	private Scene rightScene;
@@ -77,6 +76,7 @@ public class MyJfxApp extends Application {
 	private Stage left;
 	private Stage right;
 	private Ball ball;
+	private Scene mainScene;
 
 
 	/*
@@ -86,9 +86,25 @@ public class MyJfxApp extends Application {
 		launch(args);
 	}
 
+	public static void changeTempDisplay(double temp) {
+		tempDisplay.setText("Temperatur:" + df.format(temp) + "K");
+		Ball.setVelMod(temp);
+	}
+
 	public void start(Stage stage) {
 
+		MainWindowController controller = new MainWindowController();
 
+		FXMLLoader loader = new FXMLLoader();
+		loader.setController(controller);
+		colorPicker = new ColorPicker(Color.GREEN);
+		try {
+			mainWin = FXMLLoader.load(ClassLoaderUtil.getResource("omegaRogue/MainWindow.fxml", this.getClass()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		mainScene = new Scene(mainWin, primaryScreenBounds.getWidth() - 100, primaryScreenBounds.getHeight() - 100);
 		left = new Stage();
 		top = new Stage();
 		right = new Stage();
@@ -99,25 +115,25 @@ public class MyJfxApp extends Application {
 			@Override
 			public void handle(MouseEvent e) {
 				if (e.getSource().getClass() == Ball.class) {
-					Ball balll = (Ball) e.getSource();
-					selector.attach(balll);
+					Ball ball = (Ball) e.getSource();
+					selector.attach(ball);
 				}
 
 
 			}
 		};
 
-
 		for (int i = 0; i < Baelle.length; i++) {
-			Baelle[i] = new Ball(scene,
-					ThreadLocalRandom.current().nextDouble(
-							15,
-							scene.getWidth()),
-					ThreadLocalRandom.current().nextDouble(
-							15,
-							scene.getHeight()),
-					5,
-					Color.GREEN);
+//			Baelle[i] = new Ball(
+//					ThreadLocalRandom.current().nextDouble(
+//							Ball.parent.getLayoutX(),
+//							Ball.parent.getLayoutX() + Ball.parent.getWidth()+1),
+//					ThreadLocalRandom.current().nextDouble(
+//							Ball.parent.getLayoutY(),
+//							Ball.parent.getLayoutY() + Ball.parent.getHeight()+1),
+//					5,
+//					Color.GREEN);
+			Baelle[i] = new Ball(0, 0, 5, Color.GREEN);
 
 			Baelle[i].velocity = new Point2D(
 					ThreadLocalRandom.current().nextDouble(-10, 10),
@@ -141,9 +157,9 @@ public class MyJfxApp extends Application {
 		ballCount = new Text("Anzahl Baelle:\n" + Ball.ballCount);
 
 
-		tempControl = new Slider(0.1, 10, 1);
-		tempControl.setBlockIncrement(0.1);
-		tempControl.setMajorTickUnit(5);
+//		tempControl = new Slider(0.1, 10, 1);
+//		tempControl.setBlockIncrement(0.1);
+//		tempControl.setMajorTickUnit(5);
 
 		tempDisplay = new Text();
 		changeTempDisplay();
@@ -158,7 +174,7 @@ public class MyJfxApp extends Application {
 		toolBar = (HBox) createToolbarPane();
 
 		navBar = (VBox) createNavigationPane();
-		viewWindow = (GridPane) createDisplayPane();
+		viewWindow = new DisplayPane();
 
 
 		topScene = new Scene(toolBar);
@@ -171,13 +187,12 @@ public class MyJfxApp extends Application {
 		rightScene = new Scene(viewWindow);
 		rightScene.getStylesheets().add(String.valueOf(style));
 
-		scene.getStylesheets().add(String.valueOf(style));
 
 		stage.setTitle("My JavaFX Application");
-		stage.setScene(scene);
+		stage.setScene(mainScene);
 
-		stage.setHeight(primaryScreenBounds.getHeight() - topScene.getHeight());
-		stage.setWidth(primaryScreenBounds.getWidth() - leftScene.getWidth() - rightScene.getWidth());
+//		stage.setHeight(primaryScreenBounds.getHeight() - topScene.getHeight());
+//		stage.setWidth(primaryScreenBounds.getWidth() - leftScene.getWidth() - rightScene.getWidth());
 
 
 		left.setTitle("Nav");
@@ -190,11 +205,10 @@ public class MyJfxApp extends Application {
 
 
 		right.setScene(rightScene);
-		right.initStyle(StageStyle.TRANSPARENT);
 
 
-		top.show();
-		left.show();
+		//top.show();
+		//left.show();
 		right.show();
 
 		stage.show();
@@ -204,10 +218,6 @@ public class MyJfxApp extends Application {
 		startSimulation();
 
 
-	}
-
-	private void changeTempDisplay() {
-		tempDisplay.setText("Temperatur:" + df.format(tempControl.getValue()) + "K");
 	}
 
 	private void startSimulation() {
@@ -220,7 +230,7 @@ public class MyJfxApp extends Application {
 			}
 
 		}
-		selector.attach(Baelle[1]);
+
 
 
 	}
@@ -229,6 +239,11 @@ public class MyJfxApp extends Application {
 	 * Diese Methode wird vom Simulationstimer immer wieder aufgerufen.
 	 */
 	void updateSimulation() {
+		if (selected == null) {
+			selector.attach(Baelle[0]);
+		}
+
+
 		objItr = root.getChildren().listIterator();
 		while (objItr.hasNext()) {
 			Object element = objItr.next();
@@ -236,7 +251,7 @@ public class MyJfxApp extends Application {
 				((Behaviour) element).Update();
 				if (element.getClass() == Ball.class) {
 					checkBounds((Ball) element);
-					((Ball) element).setVelMod((long) tempControl.getValue());
+
 				}
 
 			}
@@ -244,10 +259,11 @@ public class MyJfxApp extends Application {
 
 		changeTempDisplay();
 		selector.Update();
-		Ball selected = (Ball) selector.getAttached();
+		selected = (Ball) selector.getAttached();
 		selected.setColor(colorPicker.getValue());
 		ballCountDisplay.setText("Selected Ball Nr. " + selected.nr.getText());
-		updateVelChart(selected.velocity);
+		ballCountDisplay.setTextAlignment(TextAlignment.CENTER);
+		VelChart.Update(selected.velocity);
 
 
 	}
@@ -255,12 +271,12 @@ public class MyJfxApp extends Application {
 	private void checkBounds(Ball ball) {
 		this.ball = ball;
 
-		if (ball.position.getX() < Ball.scene.getX() || ball.position.getX() + ball.getRadius() > Ball.scene.getWidth()) {
+		if (ball.position.getX() < Ball.parent.getLayoutX() || ball.position.getX() + ball.getRadius() > Ball.parent.getWidth()) {
 			ball.reflect(EnumDirection.LEFT);
 		}
 
 
-		if (ball.position.getY() < Ball.scene.getY() || ball.position.getY() + ball.getRadius() > Ball.scene.getHeight()) {
+		if (ball.position.getY() < Ball.parent.getLayoutY() || ball.position.getY() + ball.getRadius() > Ball.parent.getHeight()) {
 			ball.reflect(EnumDirection.UP);
 		}
 		for (Block block : Bloecke) {
@@ -281,24 +297,12 @@ public class MyJfxApp extends Application {
 		final HBox hbox = new HBox(5);
 
 		hbox.getStyleClass().add("leftBox");
-		hbox.getChildren().addAll(ballCount, new VBox(tempDisplay, tempControl));
+		//hbox.getChildren().addAll(ballCount, new VBox(tempDisplay, tempControl));
 
 		return hbox;
 	}
 
-	private Pane createDisplayPane() {
-		final GridPane gridPane = new GridPane();
-		colorPicker = new ColorPicker(Color.GREEN);
-		ballCountDisplay = new Text("");
-		Selector.getInstance().colorPicker = colorPicker;
-		gridPane.add(ballCountDisplay, 0, 0);
-		gridPane.add(colorPicker, 0, 1);
-		gridPane.add(velChart, 0, 2);
-		gridPane.getStyleClass().add("rightBox");
 
-
-		return gridPane;
-	}
 
 	private Pane createNavigationPane() {
 		final VBox vbox = new VBox(5);
@@ -309,40 +313,8 @@ public class MyJfxApp extends Application {
 		return vbox;
 	}
 
-	private Pane createBallGasPane() {
-		final Pane pane = new Pane();
-		pane.getChildren().add(root);
-		pane.getStyleClass().add("centerBox");
 
 
-		return pane;
-	}
 
-
-	private LineChart<Number, Number> createVelChart() {
-		final NumberAxis xAxis = new NumberAxis("X", -10, 10, 1);
-		final NumberAxis yAxis = new NumberAxis("Y", -10, 10, 1);
-		XYChart.Data zero = new XYChart.Data(0, 0);
-		XYChart.Data velocity = new XYChart.Data(1, 1);
-		final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		XYChart.Series series = new XYChart.Series();
-		series.getData().add(zero);
-		series.getData().add(velocity);
-		lineChart.getData().add(series);
-		lineChart.autosize();
-		lineChart.setAnimated(true);
-		return lineChart;
-
-	}
-
-	private void updateVelChart(Point2D velocity) {
-
-		XYChart.Series series = new XYChart.Series();
-		series.getData().add(new XYChart.Data(0, 0));
-		series.getData().add(new XYChart.Data(velocity.getX(), velocity.getY()));
-		velChart.getData().clear();
-		velChart.getData().add(series);
-
-	}
 
 }
