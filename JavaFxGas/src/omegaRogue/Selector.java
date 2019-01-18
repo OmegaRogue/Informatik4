@@ -1,14 +1,15 @@
 package omegaRogue;
 
+import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import static omegaRogue.MyJfxApp.colorPicker;
+
 
 public class Selector extends Circle {
 	private static Selector ourInstance = new Selector();
 
-
+	public ColorPicker colorPicker;
 	private Rigidbody attached;
 
 	private Selector() {
