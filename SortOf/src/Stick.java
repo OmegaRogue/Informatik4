@@ -4,7 +4,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stick extends Rectangle {
+public class Stick extends Rectangle implements Keller {
 
 	public double baseX;
 	public double baseY;
@@ -18,16 +18,28 @@ public class Stick extends Rectangle {
 		this.setFill(Color.GREEN);
 	}
 
-	public Plate pollFirst() {
+	public Plate poll() {
 		return plates.get(plates.size()-1);
 	}
-	public Plate pullFirst() {
-		Plate plateBuffer = pollFirst();
+	public Plate pull() {
+		Plate plateBuffer = poll();
 		plates.remove(plateBuffer);
 		return plateBuffer;
 	}
 
 	public void moveFirst(Stick to) {
-		pullFirst().move(to);
+		pull().move(to);
 	}
+
+	@Override
+	public boolean isEmpty() {
+		return plates.isEmpty();
+	}
+
+	@Override
+	public void push(int i) {
+			new Plate(i,this);
+	}
+
+
 }
