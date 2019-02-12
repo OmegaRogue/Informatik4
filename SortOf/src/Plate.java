@@ -3,23 +3,18 @@ import javafx.scene.shape.Rectangle;
 
 public class Plate extends Rectangle {
 
-	int i = 0;
-	int n = 0;
-
-	double x = 0;
-
-	public double baseX = 0;
-	public double baseY = 0;
-
 	static final double height = 10;
-
 	static final double yStep = 15;
 	static final double xStep = 30;
-
-	Stick thisStick;
+	double x = 0;
+	private int i = 0;
+	private int n = 0;
+	private double baseX = 0;
+	private double baseY = 0;
+	private Stick thisStick;
 
 	public Plate(int i, Stick stick) {
-		super(stick.baseX-(0.5*(i*20.0)),(stick.baseY-20.0)-(stick.plates.size()*10.0), i*20,10);
+		super(stick.baseX - (0.5 * (i * 20.0)), (stick.baseY - 20.0) - (stick.plates.size() * 10.0), i * 20, 10);
 
 		this.i = i;
 		this.n = stick.plates.size();
@@ -50,8 +45,8 @@ public class Plate extends Rectangle {
 		Update();
 	}
 
-	public void Update() {
-		relocate(baseX-(0.5*(i*20.0)),(baseY-10.0)-(thisStick.plates.size()*10.0));
+	private void Update() {
+		relocate(baseX - (0.5 * (i * 20.0)), (baseY - 10.0) - (thisStick.plates.size() * 10.0));
 	}
 
 }

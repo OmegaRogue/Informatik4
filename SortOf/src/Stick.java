@@ -6,21 +6,22 @@ import java.util.List;
 
 public class Stick extends Rectangle implements Keller {
 
-	public double baseX;
-	public double baseY;
-	public List<Plate> plates = new ArrayList();
+	public final double baseX;
+	public final double baseY;
+	public final List<Plate> plates = new ArrayList();
 
 
 	public Stick(double x, double y) {
-		super(x,y-100,10,100);
-		this.baseX = x+0.5*10;
+		super(x, y - 100, 10, 100);
+		this.baseX = x + 0.5 * 10;
 		this.baseY = y;
 		this.setFill(Color.GREEN);
 	}
 
 	public Plate poll() {
-		return plates.get(plates.size()-1);
+		return plates.get(plates.size() - 1);
 	}
+
 	public Plate pull() {
 		Plate plateBuffer = poll();
 		plates.remove(plateBuffer);
@@ -38,7 +39,7 @@ public class Stick extends Rectangle implements Keller {
 
 	@Override
 	public void push(int i) {
-			new Plate(i,this);
+		new Plate(i, this);
 	}
 
 
