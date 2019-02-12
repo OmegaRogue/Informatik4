@@ -12,7 +12,7 @@ public class Stick extends Rectangle implements Keller {
 
 
 	public Stick(double x, double y) {
-		super(x, y - 100, 10, 100);
+		super(x, y - 500, 10, 500);
 		this.baseX = x + 0.5 * 10;
 		this.baseY = y;
 		this.setFill(Color.GREEN);

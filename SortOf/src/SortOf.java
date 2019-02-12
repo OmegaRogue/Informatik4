@@ -18,12 +18,12 @@ import java.util.stream.IntStream;
 @SuppressWarnings("Duplicates")
 public class SortOf extends Application {
 
-	private final int[] inputInts = {8,7,6,5,4,3,2,1};
+	private int[] inputInts;
 	private  ArrayList<Integer> from = new ArrayList();
 	private ArrayList<Integer> to = new ArrayList();
-	private final Stick stickOne = new Stick(200, 100);
-	private final Stick stickTwo = new Stick(400, 100);
-	private final Stick stickThree = new Stick(600, 100);
+	private final Stick stickOne = new Stick(200, 500);
+	private final Stick stickTwo = new Stick(800, 500);
+	private final Stick stickThree = new Stick(1400, 500);
 	private final Stick stickDone = new Stick(0, 0);
 	private final Stick[] sticks = {stickOne, stickTwo, stickThree};
 
@@ -45,23 +45,27 @@ public class SortOf extends Application {
 
 	boolean paused;
 
-	Scanner keyIn;
+	static String[] arg;
 
-	Stage staged;
+	int dt = 1000;
+
+
+
+
 
 
 
 	public static void main(String[] args) {
+		arg = args;
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
-
-
-		keyIn = new Scanner(System.in);
+		inputInts = IntStream.rangeClosed(1,Integer.parseInt(arg[0])).toArray();
+		dt = Integer.parseInt(arg[1]);
 		primaryStage.setTitle("Türme von Hanoi");
-		Scene scene = new Scene(new Group(), 800, 100);
+		Scene scene = new Scene(new Group(), 1600, 500);
 
 		intsToPlates(stickOne, inputInts);
 		intsToPlates(stickDone, inputInts);
@@ -130,7 +134,6 @@ public class SortOf extends Application {
 	}
 
 	private void startup(Stage stage, Scene scene) {
-		staged = stage;
 		scene.setFill(Color.GHOSTWHITE);
 		stage.setScene(scene);
 		stage.setTitle("Türme von Hanoi");
@@ -140,7 +143,7 @@ public class SortOf extends Application {
 
 
 
-		SimulationTimer simulationLoop = new SimulationTimer(this,1000);
+		SimulationTimer simulationLoop = new SimulationTimer(this,dt);
 		move(sticks[0].plates.size(),0,1,2);
 		simulationLoop.start();
 	}
@@ -167,10 +170,12 @@ public class SortOf extends Application {
 	}
 
 	private void intsToPlates(Stick stick, int[] ints) {
-		for (int anInt : ints) {
-			new Plate(anInt, stick);
-
+		for (int i = ints.length-1; i >=0 ; i--) {
+			new Plate(ints[i], stick);
 		}
+
+
+
 	}
 
 	void movePlateFromTo(int from, int to) {
