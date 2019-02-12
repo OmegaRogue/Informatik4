@@ -31,9 +31,6 @@ public class SortOf extends Application {
 //	public Deque<Integer> intsOne = new ArrayDeque(inputInts.length);
 //	public Deque<Integer> intsTwo = new ArrayDeque();
 //	public Deque<Integer> intsThree = new ArrayDeque();
-	public int[] intsOne = inputInts;
-	public int[] intsTwo = new int[inputInts.length];
-	public int[] intsThree = new int[inputInts.length];
 	private Stick selectedOne;
 	private Stick selectedTwo;
 	private int time = 0;
